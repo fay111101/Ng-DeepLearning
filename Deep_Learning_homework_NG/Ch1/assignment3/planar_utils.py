@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 import numpy as np
 import sklearn
@@ -6,7 +8,7 @@ import sklearn.linear_model
 
 def plot_decision_boundary(model, X, y):
     """
-    画分边界，对这些数据进行分类
+    划分边界
     :param model:
     :param X:
     :param y:
@@ -18,15 +20,24 @@ def plot_decision_boundary(model, X, y):
     y_min, y_max = X[1, :].min() - 1, X[1, :].max() + 1
     h = 0.01
     # Generate a grid of points with distance h between them
+    # meshgrid通常用于数据的矢量化，可以接受两个一维数组生成两个二维矩阵，
+    # meshgrid的作用是根据传入的两个一维数组参数生成两个数组元素的列表。
+    # 如果第一个参数是xarray，维度是xdimesion，第二个参数是yarray，维度是ydimesion。
+    # 那么生成的第一个二维数组是以xarray为行，ydimesion行的向量；而第二个二维数组是以yarray的转置为列，xdimesion列的向量。
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
     # Predict the function value for the whole grid
+    # numpy的ravel和flatten用于将多维数组降为一维 flatten返回一份拷贝，
+    # ravel返回视图，会影响原始矩阵
     Z = model(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
     # Plot the contour and training examples
     plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral)
     plt.ylabel('x2')
     plt.xlabel('x1')
+    print(y.shape)
     plt.scatter(X[0, :], X[1, :], c=y, cmap=plt.cm.Spectral)
+    # plt.scatter(X[0, :], X[1, :], c=y.reshape(X[0,:].shape), cmap=plt.cm.Spectral)
+
     
 
 def sigmoid(x):
