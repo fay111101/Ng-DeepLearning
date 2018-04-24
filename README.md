@@ -1,4 +1,8 @@
-#Ng-DeepLearning
+# Andrew Ng DeepLearning
 
-## 本项目主要是跟随NG学习DeepLearning，主要涉及习题项目
-### 旨在练习，复习知识！！！
+## 本项目主要是跟随Ng学习DeepLearning
+
+### Ch1 为Ng的第一课
+
+
+
